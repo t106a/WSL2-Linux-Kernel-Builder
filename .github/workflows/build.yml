@@ -45,6 +45,10 @@ jobs:
         for file in ../[^usb]*.config; do scripts/kconfig/merge_config.sh -m -y .config $file ; done
         scripts/kconfig/merge_config.sh -y .config ../can.config
 
+    - name: Apply Waydroid Config
+      working-directory: ./kernel-${{ matrix.branch }}
+      run: scripts/kconfig/merge_config.sh -m -y .config ../waydroid.config
+
     - name: Build
       working-directory: ./kernel-${{ matrix.branch }}
       run: |
